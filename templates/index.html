@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Task Master</title>
+{% endblock %}
+
+{% block content %}
+    <div class="header">
+        <div class="jumbotron jumbotron-fluid">
+            <h1>Task Master</h1>
+            <p class="lead">A simple web app to help you organize daily tasks!</p>
+        </div>
+    </div>
+    <main>
+        <div class="form">
+            <form action="/" class="form" method="POST">
+                <div class="task">
+                    <input type="text" class="form-control" name="taskContent" id="taskContent" placeholder="Task Name">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Add Task</button>
+            </form>
+        </div>
+        <br><br>
+        <table class="table table-hover">
+            <tr>
+                <th>Task Name</th>
+                <th>Date Created</th>
+                <th>Actions</th>
+            </tr>
+            {% for task in taskList %}
+            <tr>
+                <td>{{task['taskName']}}</td>
+                <td>{{task['dateCreated']}}</td>
+                <td>
+                        <a href="/delete/{{task['taskName']}}" style="color: red;">Delete task</a>
+                        <br>
+                        <a href="/update/{{task['taskName']}}" style="color: #8b13ed;">Update task</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </main>
+{% endblock %}
