@@ -9,7 +9,7 @@ def index():
     if request.method == "POST":
         taskContent = request.form["taskContent"]
         if len(taskContent) == 0:
-            return redirect(url_for('index'))
+            return redirect('index.html')
         else:
             timeNow = time.strftime("%D %H:%M", time.localtime())
             file = open("tasks.json", "r")
