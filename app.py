@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request
-import time
+from datetime import datetime
 import json
 
 app = Flask(__name__)
@@ -11,14 +11,13 @@ def index():
         if len(taskContent) == 0:
             return redirect('/')
         else:
-            timeNow = time.asctime(time.localtime())
             file = open("tasks.json", "r")
             sample_object = json.load(file)
             file.close()
 
             y = {
                 "taskName": taskContent,
-                "dateCreated": timeNow
+                "dateCreated": datetime.now().strftime("%D %H:%M:%S")
             }
             sample_object["tasks"].append(y)
 
@@ -55,7 +54,7 @@ def update(task):
         for element in obj['tasks']:
             if element["taskName"] == task:
                 element["taskName"] = taskContent
-                element["dateCreated"] = time.asctime(time.localtime())
+                element["dateCreated"] = datetime.now().strftime("%D %H:%M:%S")
         f = open("tasks.json", "w")
         json.dump(obj, f)
         f.close()
