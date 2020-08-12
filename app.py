@@ -11,7 +11,7 @@ def index():
         if len(taskContent) == 0:
             return redirect('/')
         else:
-            timeNow = time.strftime("%D %H:%M", time.localtime())
+            timeNow = time.asctime(time.localtime())
             file = open("tasks.json", "r")
             sample_object = json.load(file)
             file.close()
@@ -55,7 +55,7 @@ def update(task):
         for element in obj['tasks']:
             if element["taskName"] == task:
                 element["taskName"] = taskContent
-                element["dateCreated"] = time.strftime("%D %H:%M", time.localtime())
+                element["dateCreated"] = time.asctime(time.localtime())
         f = open("tasks.json", "w")
         json.dump(obj, f)
         f.close()
