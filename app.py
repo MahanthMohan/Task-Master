@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, request
 from datetime import datetime
+import pytz
 import json
 
 app = Flask(__name__)
@@ -17,7 +18,7 @@ def index():
 
             y = {
                 "taskName": taskContent,
-                "dateCreated": datetime.now().strftime("%D %H:%M:%S")
+                "dateCreated": datetime.now(pytz.timezone("America/Los_Angeles")).strftime("%D %H:%M:%S")
             }
             sample_object["tasks"].append(y)
 
@@ -54,7 +55,7 @@ def update(task):
         for element in obj['tasks']:
             if element["taskName"] == task:
                 element["taskName"] = taskContent
-                element["dateCreated"] = datetime.now().strftime("%D %H:%M:%S")
+                element["dateCreated"] = datetime.now("America/Los_Angeles").strftime("%D %H:%M:%S")
         f = open("tasks.json", "w")
         json.dump(obj, f)
         f.close()
