@@ -3,6 +3,14 @@
     align-content: center;
 }
 
+.jumbotron {
+        background-color: rgb(82, 3, 252);
+}
+
+.main-title {
+	color: white;
+}
+
 .form {
     text-align: center;
     align-content: center;
