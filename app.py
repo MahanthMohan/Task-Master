@@ -55,7 +55,7 @@ def update(task):
         for element in obj['tasks']:
             if element["taskName"] == task:
                 element["taskName"] = taskContent
-                element["dateCreated"] = datetime.now("America/Los_Angeles").strftime("%D %H:%M:%S")
+                element["dateCreated"] = datetime.now(pytz.timezone("America/Los_Angeles")).strftime("%D %H:%M:%S")
         f = open("tasks.json", "w")
         json.dump(obj, f)
         f.close()
